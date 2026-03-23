@@ -1,0 +1,29 @@
+:root {
+    /* Primary Blue Tokens (#0174BE) */
+    --blue-0: #E8F6FF;
+    --blue-1: #BADCF2;
+    --blue-3: #5DA8D8;
+    --blue-5: #0174BE; /* Base Primary */
+    --blue-7: #014672;
+    --blue-10: #000000;
+
+    /* Secondary Yellow Tokens (#FFC436) */
+    --yellow-0: #FFFFFF;
+    --yellow-1: #FFF3D7;
+    --yellow-3: #FFDC86;
+    --yellow-5: #FFC436; /* Base Secondary */
+    --yellow-7: #9E7920;
+    --yellow-10: #0D0900;
+
+    /* Neutral Tokens */
+    --neutral-light: #fefefe;
+    --neutral-normal: #f1f5f9;
+    --neutral-dark: #b5b8bb;
+    --neutral-darker: #545657;
+
+    /* Semantic Tokens */
+    --bg-app: var(--neutral-normal);
+    --text-main: var(--neutral-darker);
+    --primary: var(--blue-5);
+    --secondary: var(--yellow-5);
+}
