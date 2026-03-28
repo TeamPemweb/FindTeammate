@@ -10,6 +10,10 @@ Route::get('/login', function () {
     return view('pages.login');
 })->name('login');
 
+Route::get('/signup', function () {
+    return view('pages.signup');
+})->name('signup');
+
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->name('dashboard');
