@@ -28,7 +28,6 @@
                             <x-textField fieldType="text" label="Kode OTP" placeholder="Masukkan kode OTP"></x-textField>
                         </div>
                         
-                        <!-- <button class="w-full h-12 bg-primary-5 text-white rounded-full cursor-pointer hover:bg-primary-4 focus:bg-primary-6 transition-colors duration-200 ease-in-out">Konfirmasi OTP</button> -->
                         <x-button variant="primary">Konfirmasi OTP</x-button>
                     </div> 
 
