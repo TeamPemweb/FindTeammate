@@ -17,3 +17,7 @@ Route::get('/signup', function () {
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->name('dashboard');
+
+Route::get('/otp', function () {
+    return view('layouts.otp');
+})->name('otp');
