@@ -21,3 +21,7 @@ Route::get('/dashboard', function () {
 Route::get('/otp', function () {
     return view('layouts.otp');
 })->name('otp');
+
+Route::get('/app', function (){
+    return view('layouts.app');
+})->name('app');
