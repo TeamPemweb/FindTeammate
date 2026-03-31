@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Find A Teammate</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div class="flex min-h-screen bg-primary-0 pr-10">
         
         <aside class="w-1/5">
-
+            <x-sidebar.sidebar></x-sidebar.sidebar>
         </aside>
 
         <div class="flex flex-col w-4/5 relative">
