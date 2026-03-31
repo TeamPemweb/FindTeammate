@@ -19,7 +19,7 @@
                             blur-[100px] opacity-50">
                 </div>
         
-                <main class="ps-0 p-6 fixed">
+                <main class="ps-0 p-6">
                     <h1 class="w-4xl font-bold">Selamat Datang, Aurel!</h1>
                 </main> 
             </div>
