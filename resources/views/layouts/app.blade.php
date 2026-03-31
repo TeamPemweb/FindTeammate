@@ -13,19 +13,11 @@
         </aside>
 
         <div class="flex flex-col w-5/6 relative">
-            <div class="bg-primary-0 flex justify-start relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-64 
-                            bg-linear-to-r from-primary-0 from-50% via-primary-5 via-60% to-secondary-5 
-                            blur-[100px] opacity-50">
-                </div>
-        
-                <main class="ps-0 p-6">
-                    <h1 class="w-4xl font-bold">Selamat Datang, Aurel!</h1>
-                </main> 
-            </div>
+            <div class="absolute top-0 left-0 w-full h-64 bg-linear-to-r from-primary-0 from-50% via-primary-5 via-60% to-secondary-5 blur-[100px] opacity-50"></div>
+            <x-header></x-header>
 
-            <div class="bg-white p-6 h-screen rounded-t-2xl">
-                
+            <div class="bg-white p-6 h-screen rounded-t-2xl z-50">
+                @yield('content')
             </div>
         </div>
     </div>
