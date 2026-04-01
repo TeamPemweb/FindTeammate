@@ -9,6 +9,7 @@
 @theme {
 /* --- 1. PRIMARY BLUE PALETTE (Photo 1) --- */
     --color-primary-0: #E8F6FF;
+    --color-primary-0.5: #D1E9F9;
     --color-primary-1: #BADCF2;
     --color-primary-2: #8CC2E5;
     --color-primary-3: #5DA8D8;
@@ -22,7 +23,7 @@
 
     /* --- 2. SECONDARY YELLOW PALETTE --- */
     --color-secondary-0: #FFFFFF;
-    --color-secondary-0.5: #FFF9EB;
+    --color-secondary-0.5: #FFF9EB
     --color-secondary-1: #FFF3D7;
     --color-secondary-2: #FFE7AF;
     --color-secondary-3: #FFDC86;

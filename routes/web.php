@@ -35,3 +35,25 @@ Route::get('/dashboard/dikelola', function () {
 Route::get('/dashboard/diikuti', function () {
     return view('pages.diikuti');
 })->name('dashboard.diikuti');
+
+Route::get('cariProyek', function () {
+    return view('pages.cariProyek');
+})->name('cariProyek');
+
+Route::redirect('/proyekSaya', '/proyekSaya/dikelola');
+
+Route::get('/proyekSaya/dikelola', function () {
+    return view('pages.proyekSaya');
+})->name('proyekSaya.dikelola');
+
+Route::get('/proyekSaya/diikuti', function () {
+    return view('pages.proyekSaya');
+})->name('proyekSaya.diikuti');
+
+Route::get('/lamaranSaya', function () {
+    return view('pages.lamaranSaya');
+})->name('lamaranSaya');
+
+Route::get('profile', function () {
+    return view('pages.profile');
+})->name('profile');

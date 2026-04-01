@@ -12,6 +12,10 @@
             ['name' => 'Dikelola', 'route' => 'dashboard.dikelola'],
             ['name' => 'Diikuti', 'route' => 'dashboard.diikuti'],
         ],
+        'proyekSaya' => [
+            ['name' => 'Dikelola', 'route' => 'proyekSaya.dikelola'],
+            ['name' => 'Diikuti', 'route' => 'proyekSaya.diikuti'],
+        ],
     ];
 
     $buttons = $config[$variant] ?? $config['auth'];

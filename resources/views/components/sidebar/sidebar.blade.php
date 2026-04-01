@@ -1,4 +1,3 @@
-
 <div class="flex flex-col gap-4 items-center justify-center pl-10 pr-6 pt-8">
     <img class="size-16" src="/assets/logo.png" alt="Icon">
 
@@ -15,7 +14,7 @@
 
             <x-sidebar.sidebar-menu>
                 <i data-lucide="search"></i>
-                <h1>Jelajahi Proyek</h1>
+                <h1>Cari Proyek</h1>
             </x-sidebar.sidebar-menu>
 
             <x-sidebar.sidebar-menu>
@@ -25,7 +24,7 @@
 
             <x-sidebar.sidebar-menu>
                 <i data-lucide="clipboard"></i>
-                <h1>Lamaaran Saya</h1>
+                <h1>Lamaran Saya</h1>
             </x-sidebar.sidebar-menu>
         </div>
     </div>
