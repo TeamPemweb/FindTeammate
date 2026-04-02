@@ -9,6 +9,4 @@
             <x-card.roleChips>{{ $roleTag }}</x-card.roleChips>
         </div>
     </div>
-
-    <x-button variant="primary">Edit Proyek</x-button>
 </div>
