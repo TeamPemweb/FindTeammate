@@ -61,3 +61,7 @@ Route::get('profile', function () {
 Route::get('editProfile', function () {
     return view('pages.editProfile');
 })->name('editProfile');
+
+Route::get('proyekDikelola', function () {
+    return view('pages.proyekDikelola');
+})->name('proyekDikelola');
