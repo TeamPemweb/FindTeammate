@@ -7,7 +7,7 @@
 @php
     $variants = [
         'primary'   => 'bg-primary-5 text-white hover:bg-primary-3',
-        'secondary' => 'bg-white text-primary-8 hover:bg-primary-8 hover:text-white',
+        'secondary' => 'bg-white text-primary-8 hover:bg-primary-8 hover:text-white border-1 border-primary-8',
         'danger'    => 'bg-red-500 text-white hover:bg-red-400',
         'sucess'    => 'bg-green-500 text-white hover:bg-green-400'
     ];

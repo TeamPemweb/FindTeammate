@@ -57,3 +57,7 @@ Route::get('/lamaranSaya', function () {
 Route::get('profile', function () {
     return view('pages.profile');
 })->name('profile');
+
+Route::get('editProfile', function () {
+    return view('pages.editProfile');
+})->name('editProfile');
