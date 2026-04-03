@@ -55,10 +55,12 @@ Route::get('/lamaranSaya', function () {
 Route::get('profile', function () {
     return view('pages.profile');
 })->name('profile');
-
 Route::get('editProfile', function () {
     return view('pages.editProfile');
 })->name('editProfile');
+Route::get('profilePelamar', function () {
+    return view('pages.profilPelamar');
+})->name('profilePelamar');
 
 Route::get('proyekDikelola', function () {
     return view('pages.proyekDikelola');
@@ -72,7 +74,3 @@ Route::get('detailProyekdikelola', function () {
 Route::get('proyekDiikuti', function () {
     return view('pages.proyekDiikuti');
 })->name('proyekDiikuti');
-
-Route::get('LamaranSaya', function () {
-    return view('pages.lamaranSaya');
-})->name('lamaranSaya');
