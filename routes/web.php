@@ -25,8 +25,6 @@ Route::get('/otp', function () {
     return view('layouts.otp');
 })->name('otp');
 
-//* Dashboard Route
-Route::redirect('/dashboard', '/dashboard/dikelola');
 
 Route::get('/dashboard/dikelola', function () {
     return view('pages.dikelola');
@@ -65,3 +63,14 @@ Route::get('editProfile', function () {
 Route::get('proyekDikelola', function () {
     return view('pages.proyekDikelola');
 })->name('proyekDikelola');
+
+Route::get('detailProyekdikelola', function () {
+    return view('pages.detaildikelola');
+})->name('detailProyekdikelola');
+Route::get('proyekDiikuti', function () {
+    return view('pages.proyekDiikuti');
+})->name('proyekDiikuti');
+
+Route::get('LamaranSaya', function () {
+    return view('pages.lamaranSaya');
+})->name('lamaranSaya');
