@@ -8,12 +8,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        /* Animasi tambahan untuk elemen statis */
         .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .hover-lift:hover { transform: translateY(-10px); }
         .nav-blur { transition: all 0.3s ease; }
         
-        /* Custom Keyframes untuk Background Footer */
         @keyframes pulse-glow {
             0% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.1); }
