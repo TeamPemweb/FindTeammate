@@ -80,3 +80,6 @@ Route::get('editProyek', function () {
 Route::get('lamarProyek', function () {
     return view('pages.lamarProyek');
 })->name('lamarProyek');
+Route::get('buatProyek', function () {
+    return view('pages.buatProyek');
+})->name('buatProyek');
