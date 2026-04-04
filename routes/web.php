@@ -74,6 +74,9 @@ Route::get('detailProyekdikelola', function () {
 Route::get('proyekDiikuti', function () {
     return view('pages.proyekDiikuti');
 })->name('proyekDiikuti');
+Route::get('editProyek', function () {
+    return view('pages.editProyek');
+})->name('editProyek');
 Route::get('lamarProyek', function () {
     return view('pages.lamarProyek');
 })->name('lamarProyek');
