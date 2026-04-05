@@ -42,14 +42,14 @@
     <div class="flex flex-col gap-4">
         <h1 class="text-primary-8 font-bold text-2xl">Jawaban Pertanyaan</h1>
     </div>
-        <h2 class="text-base font-semibold text-slate-900">Pertanyaan 1</h2>
-        <div class="space-y-4">
-            <div 
-                class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p class="mt-2 text-sm text-slate-700 leading-relaxed">Jawaban</p>
-            </div>
-        </div>
-            <div class="grid grid-cols-2 gap-4">
+        <form action="#" method="POST" class="space-y-8">
+        <x-project.form
+            question="Pertanyaan 1?"
+            name="question_1"
+            type="textarea"
+            placeholder="Tuliskan jawabanmu disini"
+        />
+        <div class="grid grid-cols-2 gap-4">
             <x-button variant="danger" class="w-full">Tolak</x-button>
             <x-button variant="sucess" class="w-full">Terima</x-button>
         </div>

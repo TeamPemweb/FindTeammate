@@ -26,18 +26,13 @@
                 </label>
             </div>
         </div>
-                <h2 class="text-base font-semibold text-slate-900">Pertanyaan 1</h2>
-        <div class="space-y-4">
-            <div 
-                class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p class="mt-2 text-sm text-slate-700 leading-relaxed">Jawaban</p>
-            </div>
-            <h2 class="text-base font-semibold text-slate-900">Pertanyaan 2</h2>
-        <div class="space-y-4">
-            <div 
-                class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p class="mt-2 text-sm text-slate-700 leading-relaxed">Jawaban</p>
-            </div>
+        <form action="#" method="POST" class="space-y-8">
+        <x-project.form
+            question="Pertanyaan 1"
+            name="question_1"
+            type="textarea"
+            placeholder="Tuliskan jawabanmu disini"
+        />
             <div class="flex flex-col gap">
          <x-button variant="primary">Kirim Lamaran!</x-button>
     </div>
