@@ -2,98 +2,107 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/app', function (){
-    return view('layouts.app');
-})->name('app');
-
+// ROUTES: LANDING PAGE & AUTHENTICATIONS
 Route::get('/', function () {
-    return view('pages.landingPage');
+    return view('landing.landingPage');
 });
-
+    
 Route::get('/login', function () {
-    return view('pages.mahasiswa.login');
+    return view('auth.login');
 })->name('login');
-
+    
 Route::get('/signup', function () {
-    return view('pages.mahasiswa.signup');
+    return view('auth.signup');
 })->name('signup');
 
 Route::get('/otp', function () {
-    return view('layouts.otp');
+    return view('auth.otp');
 })->name('otp');
 
+
+
+// ROUTES: DASHBOARD [DIKELOLA, DIIKUTI, ]
 Route::redirect('/dashboard', '/dashboard/dikelola');
 
 Route::get('/dashboard/dikelola', function () {
-    return view('pages.mahasiswa.dikelola');
+    return view('projects.dikelola');
 })->name('dashboard.dikelola');
 
 Route::get('/dashboard/diikuti', function () {
-    return view('pages.mahasiswa.diikuti');
+    return view('projects.diikuti');
 })->name('dashboard.diikuti');
 
-Route::get('cariProyek', function () {
-    return view('pages.mahasiswa.proyek.cariProyek');
-})->name('cariProyek');
+Route::get('cari-proyek', function () {
+    return view('projects.cariProyek');
+})->name('cariProyek'); 
 
-Route::redirect('/proyekSaya', '/proyekSaya/dikelola');
+Route::redirect('/proyek-saya', '/proyek-saya/dikelola');
 
-Route::get('/proyekSaya/dikelola', function () {
-    return view('pages.mahasiswa.proyek.proyekSaya');
+Route::get('/proyek-saya/dikelola', function () {
+    return view('projects.proyekSaya');
 })->name('proyekSaya.dikelola');
 
-Route::get('/proyekSaya/diikuti', function () {
-    return view('pages.mahasiswa.proyek.proyekSaya');
+Route::get('/proyek-saya/diikuti', function () {
+    return view('projects.proyekSaya');
 })->name('proyekSaya.diikuti');
 
-Route::get('/lamaranSaya', function () {
-    return view('pages.mahasiswa.lamaranSaya');
+Route::get('/lamaran-saya', function () {
+    return view('projects.lamaranSaya');
 })->name('lamaranSaya');
 
+
+
+// ROUTE: PROFILE
 Route::get('profile', function () {
-    return view('pages.mahasiswa.profile');
+    return view('profile.profile');
 })->name('profile');
-Route::get('editProfile', function () {
-    return view('pages.mahasiswa.editProfile');
+
+Route::get('edit-profile', function () {
+    return view('profile.editProfile');
 })->name('editProfile');
-Route::get('profilePelamar', function () {
-    return view('pages.profilPelamar');
+
+Route::get('profile-pelamar', function () {
+    return view('profile.profilPelamar');
 })->name('profilePelamar');
 
-Route::get('proyekDikelola', function () {
-    return view('pages.mahasiswa.proyek.proyekDikelola');
+
+
+// ROUTE: DETAIL PROYEK
+Route::get('proyek-dikelola', function () {
+    return view('projects.proyekDikelola');
 })->name('proyekDikelola');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pages.admin.dashboardAdmin');
-    })->name('admin.dashboard');
-
-    Route::get('/pengguna', function () {
-        return view('pages.admin.manajemenPengguna');
-    })->name('admin.pengguna');
-}); return view('pages.proyekDikelola')->name('proyekDikelola');
-
-Route::get('detailProyek', function () {
-    return view('pages.detailProyek');
+Route::get('detail-proyek', function () {
+    return view('projects.detailProyek');
 })->name('detailProyek');
 
-Route::get('detailProyekdikelola', function () {
+Route::get('/detail-proyek-dikelola', function () {
     return view('pages.detaildikelola');
 })->name('detailProyekdikelola');
 
-Route::get('proyekDiikuti', function () {
-    return view('pages.proyekDiikuti');
+Route::get('/proyek-diikuti', function () {
+    return view('projects.proyekDiikuti');
 })->name('proyekDiikuti');
 
-Route::get('editProyek', function () {
-    return view('pages.editProyek');
+Route::get('/edit-proyek', function () {
+    return view('projects.editProyek');
 })->name('editProyek');
 
-Route::get('lamarProyek', function () {
-    return view('pages.lamarProyek');
+Route::get('/lamar-proyek', function () {
+    return view('projects.lamarProyek');
 })->name('lamarProyek');
 
-Route::get('buatProyek', function () {
-    return view('pages.buatProyek');
+Route::get('/buat-proyek', function () {
+    return view('projects.buatProyek');
 })->name('buatProyek');
+
+// ROUTES: ADMIN
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboardAdmin');
+    })->name('admin.dashboard');
+
+    Route::get('/pengguna', function () {
+        return view('admin.manajemenPengguna');
+    })->name('admin.pengguna');
+});
