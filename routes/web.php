@@ -53,10 +53,12 @@ Route::get('/lamaranSaya', function () {
 Route::get('profile', function () {
     return view('pages.mahasiswa.profile');
 })->name('profile');
-
 Route::get('editProfile', function () {
     return view('pages.mahasiswa.editProfile');
 })->name('editProfile');
+Route::get('profilePelamar', function () {
+    return view('pages.profilPelamar');
+})->name('profilePelamar');
 
 Route::get('proyekDikelola', function () {
     return view('pages.mahasiswa.proyek.proyekDikelola');
@@ -70,4 +72,28 @@ Route::prefix('admin')->group(function () {
     Route::get('/pengguna', function () {
         return view('pages.admin.manajemenPengguna');
     })->name('admin.pengguna');
-});
+}); return view('pages.proyekDikelola')->name('proyekDikelola');
+
+Route::get('detailProyek', function () {
+    return view('pages.detailProyek');
+})->name('detailProyek');
+
+Route::get('detailProyekdikelola', function () {
+    return view('pages.detaildikelola');
+})->name('detailProyekdikelola');
+
+Route::get('proyekDiikuti', function () {
+    return view('pages.proyekDiikuti');
+})->name('proyekDiikuti');
+
+Route::get('editProyek', function () {
+    return view('pages.editProyek');
+})->name('editProyek');
+
+Route::get('lamarProyek', function () {
+    return view('pages.lamarProyek');
+})->name('lamarProyek');
+
+Route::get('buatProyek', function () {
+    return view('pages.buatProyek');
+})->name('buatProyek');
