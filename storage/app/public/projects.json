@@ -1,0 +1,13 @@
+[
+  {
+    "id": "661f2a9c3e1b2",
+    "project_name": "Riset Deteksi Kanker Kulit",
+    "application_period": "2025-11-01",
+    "project_field": "AI, ML, Computer Vision",
+    "project_plan": "Menggunakan CNN untuk deteksi kanker kulit.",
+    "roles": ["Front-End Developer", "Back-End Developer"],
+    "questions": ["Apa pengalamanmu dengan ML?"],
+    "accepted_info": "Silakan bergabung di grup WhatsApp.",
+    "link": "https://chat.whatsapp.com/abc123def456"
+  }
+]
