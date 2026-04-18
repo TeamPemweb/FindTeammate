@@ -1,3 +1,9 @@
+@props([
+    'name',
+    'title',
+    'description',
+    'project_field' => []
+])
 <div {{ $attributes->merge(['class' => 'flex flex-col gap-8']) }}>
     <div class="flex flex-col gap-4 justify-start items-start">
         <x-pfp-name :name="$name"></x-pfp-name>
@@ -6,7 +12,11 @@
             <p>{{ $description }}</p>
         </div>
         <div class="flex flex-row">
-            <x-card.roleChips>{{ $roleTag }}</x-card.roleChips>
+            <div class="flex flex-row gap-2">
+                @foreach($project_field as $field)
+                    <x-card.roleChips>{{ $field }}</x-card.roleChips>
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
