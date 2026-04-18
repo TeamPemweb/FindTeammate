@@ -17,7 +17,8 @@ class ProjectController extends Controller
 
     private function writeData($data)
     {
-        Storage::disk('public')->put($this->file, json_encode($data, JSON_PRETTY_PRINT));
+        $disk = storage_path('app/public/' . $this->file);
+        file_put_contents($disk, json_encode($data, JSON_PRETTY_PRINT));    
     }
 
     public function store(Request $request)
