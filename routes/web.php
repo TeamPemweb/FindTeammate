@@ -110,6 +110,6 @@ Route::prefix('admin')->group(function () {
 // ROUTES: API (CRUD)
 use App\Http\Controllers\ProjectController;
 
-Route::post('/api/projects', [ProjectController::class, 'store']);
+Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
 Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
