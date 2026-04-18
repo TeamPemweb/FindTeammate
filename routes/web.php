@@ -106,3 +106,10 @@ Route::prefix('admin')->group(function () {
         return view('admin.manajemenPengguna');
     })->name('admin.pengguna');
 });
+
+// ROUTES: API (CRUD)
+use App\Http\Controllers\ProjectController;
+
+Route::post('/api/projects', [ProjectController::class, 'store']);
+
+Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
