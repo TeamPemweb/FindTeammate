@@ -39,8 +39,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard/dikelola')
-                             ->with('success', 'Berhasil masuk!');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Berhasil masuk sebagai admin!');
+            }
+
+            return redirect()->route('dashboard.dikelola')->with('success', 'Berhasil masuk!');
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
@@ -49,7 +52,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
