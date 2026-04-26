@@ -1,29 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AuthController;
 
 // ROUTES: LANDING PAGE & AUTHENTICATIONS
 Route::get('/', function () {
     return view('landing.landingPage');
 });
-    
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-    
-Route::get('/signup', function () {
-    return view('auth.signup');
-})->name('signup');
 
-Route::get('/otp', function () {
-    return view('auth.otp');
-})->name('otp');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    
+    Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
+    Route::post('/signup', [AuthController::class, 'register']);
 
+    Route::get('/otp', function () {
+        return view('auth.otp');
+    })->name('otp');
+});
 
 
 // ROUTES: DASHBOARD [DIKELOLA, DIIKUTI, ]
-Route::redirect('/dashboard', '/dashboard/dikelola');
+Route::middleware('auth')->group(function () {
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::redirect('/dashboard', '/dashboard/dikelola');
 Route::get('/dashboard/dikelola', function () {
     return view('projects.dikelola');
 })->name('dashboard.dikelola');
@@ -96,8 +100,14 @@ Route::get('/buat-proyek', function () {
     return view('projects.buatProyek');
 })->name('buatProyek');
 
+// Routes: Api
+Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+
+Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
+
+
 // ROUTES: ADMIN
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboardAdmin');
     })->name('admin.dashboard');
@@ -106,10 +116,9 @@ Route::prefix('admin')->group(function () {
         return view('admin.manajemenPengguna');
     })->name('admin.pengguna');
 });
+});
 
-// ROUTES: API (CRUD)
-use App\Http\Controllers\ProjectController;
 
-Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
-Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
+
+
