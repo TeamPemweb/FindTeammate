@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Profile')
 
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="flex flex-row gap-4">
-                    <x-chips>Roles goes here</x-chips>
+                    <x-chips>Admin</x-chips>
                 </div>
 
             </div>

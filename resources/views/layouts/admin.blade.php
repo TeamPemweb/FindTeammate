@@ -16,7 +16,7 @@
 
         <div class="flex flex-col w-4/5 relative">
             <div class="absolute top-0 left-0 z-0 w-full h-64 bg-linear-to-r from-primary-0 from-50% via-primary-5 via-60% to-secondary-5 blur-[100px] opacity-50"></div>
-            <x-header></x-header>
+            <x-admin-header></x-admin-header>
 
             <div class="bg-white p-6 flex-1 rounded-t-2xl z-50 px-20 py-10">
                 @yield('content')

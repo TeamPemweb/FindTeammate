@@ -115,6 +115,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/pengguna', function () {
         return view('admin.manajemenPengguna');
     })->name('admin.pengguna');
+
+    Route::get('/profile', function () {
+        return view('admin.adminProfile');
+    })->name('admin.profile');
 });
 });
 

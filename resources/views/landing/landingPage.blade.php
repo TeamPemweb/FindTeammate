@@ -29,7 +29,7 @@
                 <img src="/assets/logo_complete.png" alt="Logo" draggable="false">
             </div>
             <div data-aos="fade-left">
-                <x-button href="{{ route('login') }}" variant="primary">Masuk/Daftar</x-button>
+                <x-button onclick="window.location.href='{{ route('login') }}'" variant="primary">Masuk/Daftar</x-button>
             </div>
         </nav>
 

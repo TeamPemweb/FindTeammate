@@ -12,6 +12,6 @@
     lucide.createIcons();
 
     function goToPage() {
-        window.location.href = "/login"; // ganti dengan tujuan
+        window.location.href = "/login";
     }
 </script>
