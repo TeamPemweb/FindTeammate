@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="/icon.png" width="100px">
+    <img src="public/icon.png" width="100px">
     <br>
     <img src="https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white">
     <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white">
