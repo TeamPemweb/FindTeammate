@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('role')->default('user');
+            $table->string('otp')->nullable();
+            $table->timestamp('otp_expires_at')->nullable();
             $table->timestamps();
+            $table->boolean('is_verified')->default(false);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -16,9 +16,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
     Route::post('/signup', [AuthController::class, 'register']);
 
-    Route::get('/otp', function () {
-        return view('auth.otp');
-    })->name('otp');
+    Route::get('/otp', fn() => view('auth.otp'))->name('otp');
+    Route::post('/otp/verify', [AuthController::class, 'verifyOtp'])->name('otp.verify');
 });
 
 
