@@ -17,8 +17,18 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('prodi')->nullable();
+            $table->char('angkatan', 4)->nullable();
+            $table->text('bio')->nullable();
+            $table->string('kontak')->nullable();
+            $table->string('foto_profil_url')->nullable();
+
             $table->rememberToken();
-            $table->string('role')->default('user');
+            $table->enum('role', ['user', 'admin'])->default('user'); 
+            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
+            $table->timestamp('suspended_until')->nullable();
+            
             $table->string('otp')->nullable();
             $table->timestamp('otp_expires_at')->nullable();
             $table->timestamps();
