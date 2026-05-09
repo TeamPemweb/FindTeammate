@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unique(['user_id', 'project_id', 'roles_id']);
 
             $table->foreign('user_id')
-                  ->references('user_id')
+                  ->references('id')
                   ->on('users')
                   ->onDelete('cascade');
 
