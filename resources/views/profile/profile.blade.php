@@ -22,7 +22,9 @@
         </div>
 
         <div class="flex justify-end items-center flex-1">
-            <x-button>Edit Profile</x-button>
+            <a href="{{ route('editProfile') }}">
+                <x-button>Edit Profile</x-button>
+            </a>
         </div>
     </div>
 

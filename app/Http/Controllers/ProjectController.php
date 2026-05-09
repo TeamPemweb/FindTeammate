@@ -39,7 +39,21 @@ class ProjectController extends Controller
         $projects[] = $newProject;
         $this->writeData($projects);
 
-        return redirect()->route('proyekDikelola')->with('success', 'Proyek berhasil dibuat!');
+        return redirect()->route('proyekSaya.dikelola')->with('success', 'Proyek berhasil dibuat!');
+    }
+
+    public function indexDikelola()
+    {
+        $projects = $this->readData();
+        $projects = array_reverse($projects);
+        return view('projects.proyekSaya', compact('projects'));
+    }
+
+    public function dashboardDikelola()
+    {
+        $projects = $this->readData();
+        $projects = array_slice(array_reverse($projects), 0, 3);
+        return view('projects.dikelola', compact('projects'));
     }
 
     public function show($id)
@@ -55,5 +69,16 @@ class ProjectController extends Controller
     }
 
     public function update(Request $request, $id) {}
-    public function destroy($id) {}
+    public function destroy($id)
+    {
+        $projects = $this->readData();
+        $filtered = array_filter($projects, function($project) use ($id) {
+            return $project['id'] !== $id;
+        });
+
+        // re-index the array just in case
+        $this->writeData(array_values($filtered));
+
+        return back()->with('success', 'Proyek berhasil dihapus.');
+    }
 }

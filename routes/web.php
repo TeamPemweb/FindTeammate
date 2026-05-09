@@ -27,9 +27,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::redirect('/dashboard', '/dashboard/dikelola');
-Route::get('/dashboard/dikelola', function () {
-    return view('projects.dikelola');
-})->name('dashboard.dikelola');
+Route::get('/dashboard/dikelola', [ProjectController::class, 'dashboardDikelola'])->name('dashboard.dikelola');
 
 Route::get('/dashboard/diikuti', function () {
     return view('projects.diikuti');
@@ -41,9 +39,7 @@ Route::get('cari-proyek', function () {
 
 Route::redirect('/proyek-saya', '/proyek-saya/dikelola');
 
-Route::get('/proyek-saya/dikelola', function () {
-    return view('projects.proyekSaya');
-})->name('proyekSaya.dikelola');
+Route::get('/proyek-saya/dikelola', [ProjectController::class, 'indexDikelola'])->name('proyekSaya.dikelola');
 
 Route::get('/proyek-saya/diikuti', function () {
     return view('projects.proyekSaya');
@@ -71,9 +67,6 @@ Route::get('profile-pelamar', function () {
 
 
 // ROUTE: DETAIL PROYEK
-Route::get('proyek-dikelola', function () {
-    return view('projects.proyekDikelola');
-})->name('proyekDikelola');
 
 Route::get('detail-proyek', function () {
     return view('projects.detailProyek');
@@ -103,6 +96,7 @@ Route::get('/buat-proyek', function () {
 Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
 Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
+Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
 
 // ROUTES: ADMIN

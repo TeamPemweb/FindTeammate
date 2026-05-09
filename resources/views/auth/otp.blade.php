@@ -20,16 +20,17 @@
                         </div>
                         <div class="flex flex-col gap-2">
                             <h2 class="text-center text-4xl font-bold">Konfirmasi OTP</h2>
-                            <p class="text-center text-lg font-normal">Kode OTP telah dikirimkan ke abc@gmail.com, silahkan cek inbox Anda.</p>
+                            <p class="text-center text-lg font-normal">Kode OTP telah dikirimkan ke email Anda, silahkan cek inbox Anda.</p>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-8 w-full h-full">
+                    <form action="{{ route('otp.verify') }}" method="POST" class="flex flex-col gap-8 w-full h-full">
+                        @csrf
                         <div>
-                            <x-textField fieldType="text" label="Kode OTP" placeholder="Masukkan kode OTP"></x-textField>
+                            <x-textField fieldType="text" label="Kode OTP" placeholder="Masukkan kode OTP" name="otp"></x-textField>
                         </div>
                         
-                        <x-button variant="primary">Konfirmasi OTP</x-button>
-                    </div> 
+                        <x-button variant="primary" type="submit">Konfirmasi OTP</x-button>
+                    </form> 
 
                 </div>
             </div>

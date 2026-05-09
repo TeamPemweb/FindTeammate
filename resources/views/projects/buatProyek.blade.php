@@ -13,7 +13,6 @@
 
     <form action="{{ route('projects.store') }}" method="POST" class="space-y-8">
         @csrf
-        {{-- Form standard --}}
         <x-project.form question="Nama Proyek" name="project_name" type="text" placeholder="Masukkan nama proyek" />
         <x-project.form question="Periode Waktu Pelamaran" name="application_period" type="date" placeholder="Input value" defaultIcon="calendar" />
         <x-project.form question="Bidang Proyek" name="project_field" type="text" placeholder="Masukkan bidang proyek, lalu tekan tombol spasi." />
