@@ -97,15 +97,15 @@ Route::get('/buat-proyek', function () {
 //Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
 Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
-<<<<<<< HEAD
-Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
-=======
 Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
-Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
->>>>>>> e27f9c01a6ae3408b5ad2f2004cd7e97007ec18a
+
+Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('editProyek');
+
+Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');    
 
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
+Route::get('/dashboard/dikelola', [ProjectController::class, 'dashboardDikelola'])->name('dashboard.dikelola');
 // ROUTES: ADMIN
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
