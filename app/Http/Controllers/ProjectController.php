@@ -47,11 +47,29 @@ class ProjectController extends Controller
                 }
             });
 
+<<<<<<< HEAD
             return redirect()->route('dashboard.dikelola')->with('success', 'Proyek berhasil dipublikasikan!');
             
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal membuat proyek: ' . $e->getMessage());
         }
+=======
+        return redirect()->route('proyekSaya.dikelola')->with('success', 'Proyek berhasil dibuat!');
+    }
+
+    public function indexDikelola()
+    {
+        $projects = $this->readData();
+        $projects = array_reverse($projects);
+        return view('projects.proyekSaya', compact('projects'));
+    }
+
+    public function dashboardDikelola()
+    {
+        $projects = $this->readData();
+        $projects = array_slice(array_reverse($projects), 0, 3);
+        return view('projects.dikelola', compact('projects'));
+>>>>>>> e27f9c01a6ae3408b5ad2f2004cd7e97007ec18a
     }
 
     public function show($id)
@@ -65,6 +83,7 @@ class ProjectController extends Controller
         return view('projects.proyekDikelola', compact('project'));
     }
 
+<<<<<<< HEAD
     public function update(Request $request, $id) 
     {
         // Implementasi edit informasi proyek (FT-F-6-04)
@@ -73,5 +92,19 @@ class ProjectController extends Controller
     public function destroy($id) 
     {
         // Implementasi hapus proyek
+=======
+    public function update(Request $request, $id) {}
+    public function destroy($id)
+    {
+        $projects = $this->readData();
+        $filtered = array_filter($projects, function($project) use ($id) {
+            return $project['id'] !== $id;
+        });
+
+        // re-index the array just in case
+        $this->writeData(array_values($filtered));
+
+        return back()->with('success', 'Proyek berhasil dihapus.');
+>>>>>>> e27f9c01a6ae3408b5ad2f2004cd7e97007ec18a
     }
 }

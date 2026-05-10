@@ -29,7 +29,11 @@
         <div class="flex flex-col gap-4">
             <x-project.title>Role yang Diperlukan</x-project.title>
             @foreach($project['roles'] ?? [] as $role)
-                <x-project.jobDescription role="{{ $role }}" description="Deskripsi untuk {{ $role }}"></x-project.jobDescription>
+                @if(is_array($role))
+                    <x-project.jobDescription role="{{ $role['name'] ?? 'Unknown' }}" description="Dibutuhkan {{ $role['count'] ?? 1 }} orang untuk peran ini."></x-project.jobDescription>
+                @else
+                    <x-project.jobDescription role="{{ $role }}" description="Deskripsi untuk {{ $role }}"></x-project.jobDescription>
+                @endif
             @endforeach
         </div>
 
