@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
 
 
 // ROUTES: DASHBOARD [DIKELOLA, DIIKUTI, ]
-Route::middleware('auth')->group(function () {
+Route::middleware('auth','verified')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -100,10 +100,13 @@ Route::get('/buat-proyek', function () {
 })->name('buatProyek');
 
 // Routes: Api
+//Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+//Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
 Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
-Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
+Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
 
+Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
 // ROUTES: ADMIN
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {

@@ -1,59 +1,77 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class ProjectController extends Controller
 {
-    private $file = 'projects.json';
-
-    private function readData()
-    {
-        $disk = Storage::disk('public');
-        return $disk->exists($this->file)
-            ? json_decode($disk->get($this->file), true)
-            : [];
-    }
-
-    private function writeData($data)
-    {
-        $disk = storage_path('app/public/' . $this->file);
-        file_put_contents($disk, json_encode($data, JSON_PRETTY_PRINT));    
-    }
-
     public function store(Request $request)
     {
-        $projects = $this->readData();
+        $request->validate([
+            'project_name' => 'required|string|max:200',
+            'periode_awal' => 'required|date',
+            'periode_akhir' => 'required|date|after_or_equal:periode_awal',
+            'project_field' => 'nullable|array',
+            'description' => 'required|string',
+            'roles' => 'required|array|min:1',
+            'roles.*.name' => 'required|string',
+            'roles.*.count' => 'required|integer|min:1',
+            'questions' => 'nullable|array',
+            'accepted_info' => 'nullable|string',
+        ]);
 
-        $newProject = [
-            'id' => uniqid(),
-            'project_name' => $request->project_name,
-            'application_period' => $request->application_period,
-            'project_field' => $request->project_field,
-            'project_plan' => $request->project_plan,
-            'roles' => $request->roles ?? [],
-            'questions' => $request->questions ?? [],
-            'accepted_info' => $request->accepted_info,
-        ];
+        try {
+            DB::transaction(function () use ($request) {
+                $project = Project::create([
+                    'user_id' => Auth::id(),
+                    'nama_proyek' => $request->project_name,
+                    'deskripsi' => $request->description,
+                    'status_proyek' => 'open',
+                    'periode_awal' => $request->periode_awal,
+                    'periode_akhir' => $request->periode_akhir,
+                    'bidang' => $request->project_field,
+                    'informasi_pelamar' => $request->accepted_info,
+                ]);
 
-        $projects[] = $newProject;
-        $this->writeData($projects);
+                foreach ($request->roles as $roleData) {
+                    Role::create([
+                        'project_id' => $project->project_id,
+                        'nama_peran' => $roleData['name'],
+                        'jumlah_dibutuhkan' => $roleData['count'],
+                    ]);
+                }
+            });
 
-        return redirect()->route('proyekDikelola')->with('success', 'Proyek berhasil dibuat!');
+            return redirect()->route('dashboard.dikelola')->with('success', 'Proyek berhasil dipublikasikan!');
+            
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal membuat proyek: ' . $e->getMessage());
+        }
     }
 
     public function show($id)
     {
-        $projects = $this->readData();
-        $project = collect($projects)->firstWhere('id', $id);
+        $project = Project::with(['roles', 'applications.user'])->findOrFail($id);
 
-        if (!$project) {
-            abort(404, 'Proyek tidak ditemukan');
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Akses ditolak');
         }
 
         return view('projects.proyekDikelola', compact('project'));
     }
 
-    public function update(Request $request, $id) {}
-    public function destroy($id) {}
+    public function update(Request $request, $id) 
+    {
+        // Implementasi edit informasi proyek (FT-F-6-04)
+    }
+
+    public function destroy($id) 
+    {
+        // Implementasi hapus proyek
+    }
 }
