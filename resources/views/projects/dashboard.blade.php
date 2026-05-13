@@ -3,6 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    @if(session('success'))
+        <div class="mb-6 bg-green-50 border border-green-200 rounded-2xl p-4 text-sm text-green-700 flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+            {{ session('success') }}
+        </div>
+    @endif
+
     <section class="flex gap-10">
         <div class="flex flex-col gap-6 flex-1 min-w-0">
             <h1 class="text-primary-8 text-2xl font-semibold">
@@ -22,8 +29,16 @@
             </h1>
 
             <div class="rounded-2xl bg-slate-100 overflow-hidden">
-                <x-card.notification-item 
-                    message="Budi Setiawan melamar di proyek Lorem Ipsum! Segera cek" />
+                @if(isset($notifications) && $notifications->count() > 0)
+                    @foreach($notifications as $notification)
+                        <x-card.notification-item 
+                            :message="$notification->pesan" />
+                    @endforeach
+                @else
+                    <div class="text-center text-slate-500 py-6 px-4 text-sm">
+                        Tidak ada notifikasi baru.
+                    </div>
+                @endif
             </div>
         </div>
     </section>
@@ -34,33 +49,32 @@
         </h1>
 
         <div class="flex flex-col gap-4">
-            <x-card.card-big 
-                title="Riset Deteksi Kanker Kulit Menggunakan Computer Vision"
-                :tags="['AI', 'ComputerVision', 'ML']"
-                period="01/11/2025 - 09/11/2025"
-                description="Lorem ipsum dolor sit amet consectetur. Suspendisse malesuada maecenas quisque sit tincidunt. Lectus suspendisse velit venenatis aenean odio tellus. Ultricies ut convallis tempus dignissim aliquam consequat massa libero urna. Libero sollicitu..."
-                :roles="[
-                    ['name' => 'CompVis Engineer', 'count' => 1],
-                    ['name' => 'Data Scientist', 'count' => 2],
-                    ['name' => 'Data Scientist', 'count' => 2],
-                    ['name' => 'ML Engineer', 'count' => 1],
-                    ['name' => 'Backend Dev', 'count' => 2],
-                ]"
-                ownerName="Aurelia Callysta M." />
-
-            <x-card.card-big 
-                title="Riset Deteksi Kanker Kulit Menggunakan Computer Vision"
-                :tags="['AI', 'ComputerVision', 'ML']"
-                period="01/11/2025 - 09/11/2025"
-                description="Lorem ipsum dolor sit amet consectetur. Suspendisse malesuada maecenas quisque sit tincidunt. Lectus suspendisse velit venenatis aenean odio tellus. Ultricies ut convallis tempus dignissim aliquam consequat massa libero urna. Libero sollicitu..."
-                :roles="[
-                    ['name' => 'CompVis Engineer', 'count' => 1],
-                    ['name' => 'Data Scientist', 'count' => 2],
-                    ['name' => 'Data Scientist', 'count' => 2],
-                    ['name' => 'ML Engineer', 'count' => 1],
-                    ['name' => 'Backend Dev', 'count' => 2],
-                ]"
-                ownerName="Aurelia Callysta M." />
+            @if(isset($recommendations) && $recommendations->count() > 0)
+                @foreach($recommendations as $rec)
+                    @php
+                        $recTags   = !empty($rec->bidang) ? (is_array($rec->bidang) ? $rec->bidang : array_filter(array_map('trim', explode(' ', $rec->bidang)))) : [];
+                        $recPeriod = $rec->periode_awal->format('d/m/Y') . ' - ' . $rec->periode_akhir->format('d/m/Y');
+                        $recRoles  = $rec->roles->map(fn($r) => ['name' => $r->nama_peran, 'count' => $r->jumlah_dibutuhkan])->toArray();
+                    @endphp
+                    <a href="{{ route('detailProyek', ['id' => $rec->project_id]) }}" class="block">
+                        <x-card.card-big
+                            :id="$rec->project_id"
+                            :title="$rec->nama_proyek"
+                            :tags="$recTags"
+                            :period="$recPeriod"
+                            :description="$rec->deskripsi"
+                            :roles="$recRoles"
+                            :ownerName="$rec->owner->name ?? 'Unknown'"
+                        />
+                    </a>
+                @endforeach
+            @else
+                <div class="text-center text-slate-500 py-12 rounded-2xl bg-slate-50 border border-slate-200 text-sm">
+                    Belum ada proyek aktif dari pengguna lain.
+                </div>
+            @endif
         </div>
     </section>
+
+<script>lucide.createIcons();</script>
 @endsection

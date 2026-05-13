@@ -11,11 +11,12 @@ class Project extends Model
     protected $primaryKey = 'project_id';
     protected $fillable = [
         'user_id', 'nama_proyek', 'deskripsi', 'status_proyek', 
-        'periode_awal', 'periode_akhir', 'bidang', 'informasi_pelamar'
+        'periode_awal', 'periode_akhir', 'bidang', 'pertanyaan', 'informasi_pelamar'
     ];
 
     protected $casts = [
         'bidang' => 'array',
+        'pertanyaan' => 'array',
         'periode_awal' => 'date',
         'periode_akhir' => 'date',
     ];

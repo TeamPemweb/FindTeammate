@@ -1,19 +1,29 @@
 @extends('projects.dashboard')
 
 @section('dashboard_content')
-    <x-card.card-small 
-        title="Platform E-Learning Fakultas Teknik"
-        :tags="['WebDev', 'React', 'NodeJS']"
-        period="05/11/2025 - 20/11/2025"
-        ownerName="Andi Pratama" />
+    @if(isset($applications) && $applications->count() > 0)
+        @foreach($applications as $application)
+            @php
+                $project = $application->project;
+                $tags = !empty($project->bidang) ? (is_array($project->bidang) ? $project->bidang : array_filter(array_map('trim', explode(' ', $project->bidang)))) : [];
+                $period = $project->periode_awal->format('d/m/Y') . ' - ' . $project->periode_akhir->format('d/m/Y');
+                $ownerName = $project->owner->name ?? 'Unknown';
+            @endphp
+            <a href="{{ route('proyekDiikuti') }}" class="block">
+                <x-card.card-small 
+                    :title="$project->nama_proyek"
+                    :tags="$tags"
+                    :period="$period"
+                    :ownerName="$ownerName" />
+            </a>
+        @endforeach
 
-    <x-card.card-small 
-        title="Aplikasi Monitoring Kualitas Udara"
-        :tags="['IoT', 'Python', 'Dashboard']"
-        period="12/11/2025 - 28/11/2025"
-        ownerName="Dewi Lestari" />
-
-    <a href="#" class="text-primary-5 text-sm font-semibold hover:underline text-center mt-2">
-        Lihat lebih banyak
-    </a>
+        <a href="{{ route('proyekSaya.diikuti') }}" class="text-primary-5 text-sm font-semibold hover:underline text-center mt-2 block">
+            Lihat lebih banyak
+        </a>
+    @else
+        <div class="text-center text-slate-500 py-8 text-sm">
+            Belum ada proyek yang diikuti.
+        </div>
+    @endif
 @endsection

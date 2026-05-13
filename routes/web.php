@@ -29,13 +29,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::redirect('/dashboard', '/dashboard/dikelola');
 Route::get('/dashboard/dikelola', [ProjectController::class, 'dashboardDikelola'])->name('dashboard.dikelola');
 
-Route::get('/dashboard/diikuti', function () {
-    return view('projects.diikuti');
-})->name('dashboard.diikuti');
+Route::get('/dashboard/diikuti', [ProjectController::class, 'dashboardDiikuti'])->name('dashboard.diikuti');
 
-Route::get('cari-proyek', function () {
-    return view('projects.cariProyek');
-})->name('cariProyek'); 
+Route::get('cari-proyek', [ProjectController::class, 'cariProyek'])->name('cariProyek');
 
 Route::redirect('/proyek-saya', '/proyek-saya/dikelola');
 
@@ -68,9 +64,7 @@ Route::get('profile-pelamar', function () {
 
 // ROUTE: DETAIL PROYEK
 
-Route::get('detail-proyek', function () {
-    return view('projects.detailProyek');
-})->name('detailProyek');
+Route::get('detail-proyek/{id}', [ProjectController::class, 'detailProyek'])->name('detailProyek');
 
 Route::get('/detail-proyek-dikelola', function () {
     return view('pages.detaildikelola');
@@ -84,9 +78,8 @@ Route::get('/edit-proyek', function () {
     return view('projects.editProyek');
 })->name('editProyek');
 
-Route::get('/lamar-proyek', function () {
-    return view('projects.lamarProyek');
-})->name('lamarProyek');
+Route::get('/lamar-proyek/{id}', [ProjectController::class, 'createLamaran'])->name('lamarProyek');
+Route::post('/lamar-proyek/{id}', [ProjectController::class, 'storeLamaran'])->name('storeLamaran');
 
 Route::get('/buat-proyek', function () {
     return view('projects.buatProyek');
@@ -99,13 +92,12 @@ Route::post('/projects', [ProjectController::class, 'store'])->name('projects.st
 
 Route::get('/proyek-dikelola/{id}', [ProjectController::class, 'show'])->name('proyekDikelola');
 
-Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('editProyek');
+Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
 
 Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');    
 
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
-Route::get('/dashboard/dikelola', [ProjectController::class, 'dashboardDikelola'])->name('dashboard.dikelola');
 // ROUTES: ADMIN
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {

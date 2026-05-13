@@ -1,16 +1,17 @@
 @extends('projects.dashboard')
 
 @section('dashboard_content')
-    @if(isset($projects) && count($projects) > 0)
+    @if(isset($projects) && $projects->count() > 0)
         @foreach($projects as $project)
             @php
-                $tags = !empty($project['project_field']) ? array_filter(array_map('trim', explode(' ', $project['project_field']))) : [];
+                $tags = !empty($project->bidang) ? (is_array($project->bidang) ? $project->bidang : array_filter(array_map('trim', explode(' ', $project->bidang)))) : [];
+                $period = $project->periode_awal->format('d/m/Y') . ' - ' . $project->periode_akhir->format('d/m/Y');
             @endphp
-            <a href="{{ route('proyekDikelola', ['id' => $project['id']]) }}" class="block">
+            <a href="{{ route('proyekDikelola', ['id' => $project->project_id]) }}" class="block">
                 <x-card.card-small 
-                    :title="$project['project_name'] ?? 'Untitled'"
+                    :title="$project->nama_proyek"
                     :tags="$tags"
-                    :period="$project['application_period'] ?? ''"
+                    :period="$period"
                     ownerName="You" />
             </a>
         @endforeach
