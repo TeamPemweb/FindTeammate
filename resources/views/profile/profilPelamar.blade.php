@@ -9,7 +9,7 @@
 <div class="flex flex-col gap-12">
     <div class="flex flex-row items-center gap-14">
         <div class="flex flex-row gap-8">
-            <img src="assets/pfp-large.png" alt="Profile Picture" class="size-40">
+            <img src="{{ asset('assets/pfp.png') }}" alt="Profile Picture" class="size-12">
             <div class="flex flex-col justify-center items-start gap-6">
                 <div class="flex flex-col justify-start items-start gap-2">
                     <h1 class="text-3xl text-primary-8 font-bold">Name</h1>

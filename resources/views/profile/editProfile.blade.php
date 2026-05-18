@@ -6,7 +6,7 @@
 <x-back></x-back>
     <div class="flex flex-col gap-14">
         <div class="flex flex-col justify-center items-center gap-4">
-            <img src="assets/pfp-large.png" alt="Profile Photo" class="size-36">
+            <img src="{{ asset('assets/pfp.png') }}" alt="Profile Photo" class="size-12">
             <x-button>Ubah Foto Profile</x-button>
         </div>
 

@@ -41,9 +41,7 @@ Route::get('/proyek-saya/diikuti', function () {
     return view('projects.proyekSaya');
 })->name('proyekSaya.diikuti');
 
-Route::get('/lamaran-saya', function () {
-    return view('projects.lamaranSaya');
-})->name('lamaranSaya');
+Route::get('/lamaran-saya', [ProjectController::class, 'lamaranSaya'])->name('lamaranSaya');
 
 
 

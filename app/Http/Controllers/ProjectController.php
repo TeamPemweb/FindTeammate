@@ -18,6 +18,16 @@ class ProjectController extends Controller
         return view('projects.proyekSaya', compact('projects'));
     }
 
+    public function lamaranSaya()
+    {
+        $applications = ProjectApplication::with(['project.owner', 'role'])
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
+        
+        return view('projects.lamaranSaya', compact('applications'));
+    }
+
     public function cariProyek(Request $request)
     {
         $query = $request->input('q', '');
