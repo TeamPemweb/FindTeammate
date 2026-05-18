@@ -97,7 +97,7 @@
         />
 
         <div class="flex flex-wrap items-center justify-start gap-4">
-            <x-button type="button" variant="secondary">Batalkan</x-button>
+            <x-button type="button" variant="secondary" onclick="window.history.back();">Batalkan</x-button>
             <x-button type="submit" variant="primary">Simpan Perubahan</x-button>
         </div>
     </form>

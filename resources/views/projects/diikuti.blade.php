@@ -9,7 +9,7 @@
                 $period = $project->periode_awal->format('d/m/Y') . ' - ' . $project->periode_akhir->format('d/m/Y');
                 $ownerName = $project->owner->name ?? 'Unknown';
             @endphp
-            <a href="{{ route('proyekDiikuti') }}" class="block">
+            <a href="{{ route('proyekDiikuti', $project->project_id) }}" class="block">
                 <x-card.card-small 
                     :title="$project->nama_proyek"
                     :tags="$tags"

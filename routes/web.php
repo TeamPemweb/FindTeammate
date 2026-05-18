@@ -32,6 +32,7 @@ Route::get('/dashboard/dikelola', [ProjectController::class, 'dashboardDikelola'
 Route::get('/dashboard/diikuti', [ProjectController::class, 'dashboardDiikuti'])->name('dashboard.diikuti');
 
 Route::get('cari-proyek', [ProjectController::class, 'cariProyek'])->name('cariProyek');
+Route::get('api/proyek/search', [ProjectController::class, 'searchProjectsApi'])->name('api.cariProyek');
 
 Route::redirect('/proyek-saya', '/proyek-saya/dikelola');
 
@@ -54,9 +55,7 @@ Route::get('edit-profile', function () {
     return view('profile.editProfile');
 })->name('editProfile');
 
-Route::get('profile-pelamar', function () {
-    return view('profile.profilPelamar');
-})->name('profilePelamar');
+Route::get('profile-pelamar/{id}', [ProjectController::class, 'profilPelamar'])->name('profilePelamar');
 
 
 
@@ -68,9 +67,7 @@ Route::get('/detail-proyek-dikelola', function () {
     return view('pages.detaildikelola');
 })->name('detailProyekdikelola');
 
-Route::get('/proyek-diikuti', function () {
-    return view('projects.proyekDiikuti');
-})->name('proyekDiikuti');
+Route::get('/proyek-diikuti/{id}', [ProjectController::class, 'proyekDiikuti'])->name('proyekDiikuti');
 
 Route::get('/edit-proyek', function () {
     return view('projects.editProyek');
@@ -78,6 +75,8 @@ Route::get('/edit-proyek', function () {
 
 Route::get('/lamar-proyek/{id}', [ProjectController::class, 'createLamaran'])->name('lamarProyek');
 Route::post('/lamar-proyek/{id}', [ProjectController::class, 'storeLamaran'])->name('storeLamaran');
+Route::patch('/lamaran/{id}/accept', [ProjectController::class, 'acceptLamaran'])->name('lamaran.accept');
+Route::delete('/lamaran/{id}/reject', [ProjectController::class, 'rejectLamaran'])->name('lamaran.reject');
 
 Route::get('/buat-proyek', function () {
     return view('projects.buatProyek');

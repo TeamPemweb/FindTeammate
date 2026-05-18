@@ -47,6 +47,50 @@ class ProjectController extends Controller
         return view('projects.cariProyek', compact('projects', 'query'));
     }
 
+    public function searchProjectsApi(Request $request)
+    {
+        $query = $request->input('q', '');
+
+        $projects = Project::with(['roles', 'owner'])
+            ->where('status_proyek', 'open')
+            ->when($query, function ($q) use ($query) {
+                $q->where(function ($inner) use ($query) {
+                    $inner->where('nama_proyek', 'like', "%{$query}%")
+                          ->orWhere('deskripsi', 'like', "%{$query}%");
+                });
+            })
+            ->latest()
+            ->paginate(10);
+
+        // Format data for frontend
+        $data = $projects->map(function($project) {
+            $tags = !empty($project->bidang) ? (is_array($project->bidang) ? $project->bidang : array_filter(array_map('trim', explode(' ', $project->bidang)))) : [];
+            $period = $project->periode_awal->format('d/m/Y') . ' - ' . $project->periode_akhir->format('d/m/Y');
+            $roles = $project->roles->map(function($r) {
+                return ['name' => $r->nama_peran, 'count' => $r->jumlah_dibutuhkan];
+            })->toArray();
+
+            return [
+                'id' => $project->project_id,
+                'nama_proyek' => $project->nama_proyek,
+                'tags' => $tags,
+                'period' => $period,
+                'deskripsi' => $project->deskripsi,
+                'roles' => $roles,
+                'ownerName' => $project->owner->name ?? 'Unknown',
+                'detail_url' => route('detailProyek', ['id' => $project->project_id])
+            ];
+        });
+
+        return response()->json([
+            'data' => $data,
+            'total' => $projects->total(),
+            'query' => $query,
+            'has_pages' => $projects->hasPages(),
+            'links' => (string) $projects->links()
+        ]);
+    }
+
 
     public function dashboardDikelola()
     {
@@ -155,7 +199,38 @@ class ProjectController extends Controller
     public function detailProyek($id)
     {
         $project = Project::with(['roles', 'owner'])->findOrFail($id);
-        return view('projects.detailProyek', compact('project'));
+        
+        $hasApplied = false;
+        $isAccepted = false;
+        if (Auth::check()) {
+            $application = \App\Models\ProjectApplication::where('user_id', Auth::id())
+                ->where('project_id', $project->project_id)
+                ->first();
+                
+            if ($application) {
+                $hasApplied = true;
+                if ($application->status_lamaran === 'accepted') {
+                    $isAccepted = true;
+                }
+            }
+        }
+
+        return view('projects.detailProyek', compact('project', 'hasApplied', 'isAccepted'));
+    }
+
+    public function proyekDiikuti($id)
+    {
+        $project = Project::with(['roles', 'owner'])->findOrFail($id);
+        $application = \App\Models\ProjectApplication::where('user_id', Auth::id())
+            ->where('project_id', $project->project_id)
+            ->first();
+
+        // Security check: only accepted users can view this
+        if (!$application || $application->status_lamaran !== 'accepted') {
+            return redirect()->route('detailProyek', $id)->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
+        return view('projects.proyekDiikuti', compact('project', 'application'));
     }
 
     public function createLamaran($id)
@@ -202,6 +277,44 @@ class ProjectController extends Controller
         ]);
 
         return redirect()->route('lamaranSaya')->with('success', 'Lamaran berhasil dikirim!');
+    }
+
+    public function acceptLamaran($id)
+    {
+        $application = ProjectApplication::with('project')->findOrFail($id);
+
+        if ($application->project->user_id !== Auth::id()) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $application->update(['status_lamaran' => 'accepted']);
+
+        return back()->with('success', 'Pelamar berhasil diterima.');
+    }
+
+    public function rejectLamaran($id)
+    {
+        $application = ProjectApplication::with('project')->findOrFail($id);
+
+        if ($application->project->user_id !== Auth::id()) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $application->update(['status_lamaran' => 'rejected']);
+
+        return back()->with('success', 'Pelamar telah ditolak.');
+    }
+
+    public function profilPelamar($id)
+    {
+        $application = ProjectApplication::with(['user', 'project', 'role'])->findOrFail($id);
+
+        // Hanya pemilik proyek yang boleh melihat profil pelamar dari lamaran ini
+        if ($application->project->user_id !== Auth::id()) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        return view('profile.profilPelamar', compact('application'));
     }
 
     public function edit($id)

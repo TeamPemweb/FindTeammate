@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Detail Proyek')
 
@@ -30,9 +30,15 @@
         </div>
         
         <div class="flex flex-col mt-4">
-             <a href="{{ route('lamarProyek', ['id' => $project->project_id]) }}">
-                 <x-button variant="primary">Lamar Proyek</x-button>
-             </a>
+             @if($hasApplied)
+                 <x-button disabled="true" class="bg-gray-400 text-white cursor-not-allowed w-fit hover:bg-gray-400">Anda sudah melamar ke proyek ini</x-button>
+             @elseif(Auth::check() && $project->user_id === Auth::id())
+                 <x-button disabled="true" class="bg-gray-400 text-white cursor-not-allowed w-fit hover:bg-gray-400">Ini proyek Anda</x-button>
+             @else
+                 <a href="{{ route('lamarProyek', ['id' => $project->project_id]) }}">
+                     <x-button variant="primary">Lamar Proyek</x-button>
+                 </a>
+             @endif
         </div>
     </div>
 </div>

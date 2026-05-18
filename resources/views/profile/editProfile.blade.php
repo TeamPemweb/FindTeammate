@@ -17,7 +17,7 @@
         </div>
 
         <div class="flex gap-4">
-            <x-button variant="secondary">Batalkan</x-button>
+            <x-button variant="secondary" onclick="window.history.back();">Batalkan</x-button>
             <x-button variant="primary">Simpan Perubahan</x-button>
         </div>
     </div>

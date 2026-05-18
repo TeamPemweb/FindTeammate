@@ -25,7 +25,7 @@
     $periodeAkhir = \Carbon\Carbon::parse($project->periode_akhir)->format('d/m/Y');
 @endphp
 
-<a href="{{ route('detailProyek', $project->project_id) }}" class="block w-full bg-[#F4F7F9] rounded-3xl p-6 flex flex-col gap-4 relative hover:bg-gray-100 transition-colors">
+<a href="{{ $application->status_lamaran === 'accepted' ? route('proyekDiikuti', $project->project_id) : route('detailProyek', $project->project_id) }}" class="block w-full bg-[#F4F7F9] rounded-3xl p-6 flex flex-col gap-4 relative hover:bg-gray-100 transition-colors">
     <!-- Status -->
     <div class="flex items-center gap-3">
         <div class="h-4 w-24 rounded-full {{ $statusColor }}"></div>
