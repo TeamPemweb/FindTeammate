@@ -20,23 +20,6 @@
             </div>
             
         </div>
-
-        <div class="flex justify-end items-center flex-1">
-            <x-button>Edit Profile</x-button>
-        </div>
-    </div>
-
-    <div class="flex flex-col gap-4">
-        <h1 class="text-primary-8 font-bold text-2xl">Biodata Saya</h1>
-        <p class="text-black font-normal text-base">Description goes here</p>
-    </div>
-
-    <div class="flex flex-col gap-4">
-        <h1 class="text-primary-8 font-bold text-2xl">Portofolio Saya</h1>
-    </div>
-
-    <div>
-        <h1 class="text-primary-8 font-bold text-2xl">Proyek Saya</h1>
     </div>
 
     <form method="POST" action="{{ route('logout') }}">

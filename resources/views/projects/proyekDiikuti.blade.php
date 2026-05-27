@@ -10,7 +10,7 @@
             <x-project.projectHeader 
                 :name="$project->owner->name ?? 'Unknown'" 
                 :title="$project->nama_proyek" 
-                :description="$project->deskripsi ?? ''" 
+                :description="\Carbon\Carbon::parse($project->periode_awal)->format('d M Y') . ' - ' . \Carbon\Carbon::parse($project->periode_akhir)->format('d M Y')" 
                 :project_field="is_array($project->bidang) ? $project->bidang : (is_string($project->bidang) ? json_decode($project->bidang, true) : [])"
             />
         </div>

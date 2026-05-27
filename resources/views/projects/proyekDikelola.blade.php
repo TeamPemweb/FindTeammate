@@ -17,7 +17,7 @@
             <x-project.projectHeader
                 :name="'Dikelola oleh ' . ($project->owner->name ?? 'Unknown')"
                 :title="$project->nama_proyek"
-                :description="$project->deskripsi ?? ''"
+                :description="\Carbon\Carbon::parse($project->periode_awal)->format('d M Y') . ' - ' . \Carbon\Carbon::parse($project->periode_akhir)->format('d M Y')"
                 :project_field="is_array($project->bidang) ? $project->bidang : []"
             />
             <a href="{{ route('projects.edit', $project->project_id) }}">

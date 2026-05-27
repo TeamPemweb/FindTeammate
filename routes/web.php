@@ -97,13 +97,11 @@ Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('pr
 
 // ROUTES: ADMIN
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboardAdmin');
-    })->name('admin.dashboard');
-
-    Route::get('/pengguna', function () {
-        return view('admin.manajemenPengguna');
-    })->name('admin.pengguna');
+    Route::get('/dashboard', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+    Route::get('/pengguna', [\App\Http\Controllers\AdminController::class, 'pengguna'])->name('admin.pengguna');
+    Route::post('/pengguna/{id}/toggle-status', [\App\Http\Controllers\AdminController::class, 'toggleUserStatus'])->name('admin.pengguna.toggle');
+    Route::get('/api/pengguna/search', [\App\Http\Controllers\AdminController::class, 'searchUsersApi'])->name('api.admin.pengguna');
 
     Route::get('/profile', function () {
         return view('admin.adminProfile');

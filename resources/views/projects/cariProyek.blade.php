@@ -6,7 +6,6 @@
 <div class="w-full flex flex-col gap-6">
     <h1 class="text-primary-8 text-2xl font-semibold">Cari Proyek Aktif</h1>
 
-    {{-- Search Form --}}
     <form method="GET" action="{{ route('cariProyek') }}" class="w-full" onsubmit="return false;">
         <div class="relative w-full">
             <input
@@ -24,7 +23,6 @@
         </div>
     </form>
 
-    {{-- Results Info --}}
     <p id="results-info" class="text-sm text-slate-500">
         @if($query)
             Menampilkan <span class="font-semibold text-slate-700">{{ $projects->total() }}</span> hasil untuk
@@ -34,7 +32,6 @@
         @endif
     </p>
 
-    {{-- Project List --}}
     <div id="project-list" class="flex flex-col gap-4">
         @forelse($projects as $project)
             @php
@@ -70,7 +67,6 @@
         @endforelse
     </div>
 
-    {{-- Pagination --}}
     <div id="pagination-container" class="flex justify-center mt-4">
         @if($projects->hasPages())
             {{ $projects->links() }}
@@ -93,7 +89,6 @@
             }, 300);
         });
 
-        // Make fetchProjects available globally for the 'Tampilkan semua proyek' link
         window.fetchProjects = function(query) {
             fetch(`/api/proyek/search?q=${encodeURIComponent(query)}`, {
                 headers: {
@@ -103,19 +98,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Update results info
                 if (data.query) {
                     resultsInfo.innerHTML = `Menampilkan <span class="font-semibold text-slate-700">${data.total}</span> hasil untuk "<span class="font-semibold text-primary-8">${data.query}</span>"`;
                 } else {
                     resultsInfo.innerHTML = `Menampilkan semua proyek aktif (${data.total} proyek)`;
                 }
 
-                // Render projects
                 projectList.innerHTML = '';
                 
                 if (data.data.length > 0) {
                     data.data.forEach(project => {
-                        // Render tags
                         let tagsHtml = '';
                         if (project.tags.length > 0) {
                             tagsHtml = '<div class="flex flex-wrap gap-2">';
@@ -125,7 +117,6 @@
                             tagsHtml += '</div>';
                         }
                         
-                        // Render roles
                         let rolesHtml = '';
                         if (project.roles.length > 0) {
                             rolesHtml = '<div class="flex flex-col gap-2"><p class="text-sm font-medium text-slate-700">Role yang diperlukan:</p><div class="flex flex-wrap items-center gap-2">';
