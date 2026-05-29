@@ -3,6 +3,7 @@
     'label' => 'Text Field',
     'placeholder' => 'Placeholder',
     'name' => '',
+    'value' => '',
 ])
 
 @php
@@ -22,6 +23,7 @@
             class="w-full text-sm h-12 transition-colors ease-in-out duration-200 rounded-4xl px-6 py-3 outline-1 outline-slate-200 focus:outline-2 focus:outline-primary-5"
             type="{{ $fieldType }}"
             name="{{ $name }}"
+            value="{{ $value }}"
             placeholder="{{ $placeholder }}"
         >
 

@@ -54,6 +54,7 @@ Route::get('profile', function () {
 Route::get('edit-profile', function () {
     return view('profile.editProfile');
 })->name('editProfile');
+Route::put('edit-profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('updateProfile');
 
 Route::get('profile-pelamar/{id}', [ProjectController::class, 'profilPelamar'])->name('profilePelamar');
 
