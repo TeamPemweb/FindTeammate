@@ -333,7 +333,7 @@ class ProjectController extends Controller
             'project_name' => 'required|string|max:200',
             'periode_awal' => 'required|date',
             'periode_akhir' => 'required|date|after_or_equal:periode_awal',
-            'project_field' => 'nullable|array',
+            'project_field' => 'nullable|string',
             'description' => 'required|string',
             'accepted_info' => 'nullable|string',
             'roles' => 'required|array|min:1',

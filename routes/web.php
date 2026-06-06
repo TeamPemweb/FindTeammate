@@ -70,9 +70,6 @@ Route::get('/detail-proyek-dikelola', function () {
 
 Route::get('/proyek-diikuti/{id}', [ProjectController::class, 'proyekDiikuti'])->name('proyekDiikuti');
 
-Route::get('/edit-proyek', function () {
-    return view('projects.editProyek');
-})->name('editProyek');
 
 Route::get('/lamar-proyek/{id}', [ProjectController::class, 'createLamaran'])->name('lamarProyek');
 Route::post('/lamar-proyek/{id}', [ProjectController::class, 'storeLamaran'])->name('storeLamaran');
