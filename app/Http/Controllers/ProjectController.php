@@ -236,8 +236,7 @@ class ProjectController extends Controller
     public function createLamaran($id)
     {
         $project = Project::with('roles')->findOrFail($id);
-        
-        // Cek jika user memilikinya (tidak boleh melamar proyek sendiri)
+
         if ($project->user_id === Auth::id()) {
             return redirect()->route('detailProyek', $id)->with('error', 'Anda tidak bisa melamar proyek Anda sendiri.');
         }

@@ -12,20 +12,16 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        // Pengguna Aktif (Online in the last 15 minutes)
         $activeUsers = DB::table('sessions')
             ->whereNotNull('user_id')
             ->where('last_activity', '>=', time() - 900)
             ->distinct('user_id')
             ->count('user_id');
 
-        // Proyek Aktif
         $activeProjects = Project::where('status_proyek', 'open')->count();
 
-        // Total Pengguna
         $totalUsers = User::count();
 
-        // Chart Data: Projects created per month for the current year
         $projectsPerMonth = Project::select(
                 DB::raw('MONTH(created_at) as month'),
                 DB::raw('COUNT(*) as count')
@@ -38,7 +34,6 @@ class AdminController extends Controller
         $chartLabels = [];
         $chartData = [];
         
-        // Initialize all 12 months with 0
         for ($i = 1; $i <= 12; $i++) {
             $monthName = Carbon::create()->month($i)->translatedFormat('F');
             $chartLabels[] = $monthName;
@@ -64,7 +59,7 @@ class AdminController extends Controller
     {
         $query = $request->input('q', '');
 
-        $penggunaList = User::where('role', '!=', 'admin') // Opsional: sembunyikan admin lain dari daftar
+        $penggunaList = User::where('role', '!=', 'admin')
             ->when($query, function ($q) use ($query) {
                 $q->where(function ($inner) use ($query) {
                     $inner->where('name', 'like', "%{$query}%")
