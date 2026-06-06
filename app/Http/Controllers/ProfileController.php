@@ -20,7 +20,6 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('foto_profil')) {
-            // Delete old photo if exists
             if ($user->foto_profil_url) {
                 Storage::disk('public')->delete($user->foto_profil_url);
             }

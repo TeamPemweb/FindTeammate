@@ -116,14 +116,12 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Jika user sedang disuspend (dan suspended_until lebih dari waktu sekarang), kita aktifkan lagi
         if ($user->suspended_until && $user->suspended_until > now()) {
             $user->suspended_until = null;
             $user->save();
             return back()->with('success', 'Pengguna berhasil diaktifkan kembali.');
         } 
         
-        // Jika user aktif, kita suspend selama 30 hari
         $user->suspended_until = now()->addDays(30);
         $user->save();
         
